@@ -1,0 +1,28 @@
+{% extends "app/base.html" %} {% load widget_tweaks %} {% block content %}
+
+<div class="card card-profile my-5 mx-auto">
+  <div class="card-body">
+    <h5 class="card-title text-center">プロフィール</h5>
+    <form method="post" enctype="multipart/form-data">
+      {{ form.non_field_errors }} {% for field in form %}
+      <div class="field">{{ field.label_tag }} {{ field }}</div>
+
+      {% if field.help_text %}
+      <span class="helptext">{{ field.help_text }}</span>
+      {% endif %} {% if field.errors %}
+      <div class="errorlist">
+        {% for error in field.errors %} {{ error }}<br />
+        {% endfor %}
+      </div>
+      {% endif %} {% endfor %} {% csrf_token %}
+
+      <div class="button mx-auto">
+        <button class="btn btn-lg btn-warning btn-block" type="submit">
+          登録する
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>カスタム認証チュートリアル</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <ul class="navbar-nav ml-auto">
+          <!-- === ナビゲーション START === -->
+          <li class="nav-item">
+            <a class="nav-link" href="/">ホーム</a>
+          </li>
+
+          <!-- ログイン状態かどうかの判定  user.is_authenticated  -->
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">プロフィール</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+          </li>
+
+          {% else %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">スタッフ</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+          </li>
+          {% endif %}
+          <!-- === ナビゲーション END === -->
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container">{% block content %} {% endblock %}</div>
+    </main>
+
+    <footer class="py-2 bg-dark">
+      <p class="m-0 text-center text-white">
+        Copyright &copy; Django Startup 2020
+      </p>
+    </footer>
+
+    {% block extra_js %} {% endblock %}
+  </body>
+</html>

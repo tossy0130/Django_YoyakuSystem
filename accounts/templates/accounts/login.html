@@ -1,0 +1,26 @@
+{% extends "app/base.html" %} {% load widget_tweaks %} {% block content %}
+
+<div class="card card-auth my-5 mx-auto">
+  <div class="card-body">
+    <h5 class="card-title text-center">ログイン</h5>
+    <form method="post" class="form-auth">
+      {{ form.non_field_errors }} {% for field in form %}
+
+      <div class="form-label-group">
+        {{ field.label_tag }} {{ field }} {% if field.help_text %}
+        <span class="helptext">{{ field.help_text }}</span>
+        {% endif %}
+      </div>
+
+      {% endfor %} {% csrf_token %}
+
+      <div class="button mx-auto">
+        <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">
+          ログイン
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
